@@ -1,5 +1,4 @@
-import { useClient } from 'next/data-client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Cadastro({
   onSalvar,
@@ -8,10 +7,14 @@ export default function Cadastro({
   onSalvar: (livro: { nome: string; numPaginas: number }) => void;
   onCancel: () => void;
 }) {
-  const client = useClient(); // Adicione esta linha
+  const [nome, setNome] = useState('');
+  const [numPaginas, setNumPaginas] = useState('');
 
-  const [nome, setNome] = client.useState('');
-  const [numPaginas, setNumPaginas] = client.useState('');
+  useEffect(() => {
+    // Garante que o código dentro deste bloco seja executado no lado do cliente
+    setNome(''); // Exemplo de uso, você pode ajustar conforme necessário
+    setNumPaginas(''); // Exemplo de uso, você pode ajustar conforme necessário
+  }, []); // O array vazio [] garante que o useEffect seja executado apenas uma vez, sem dependências
 
   const handleSalvar = () => {
     onSalvar({ nome, numPaginas: parseInt(numPaginas, 10) });
