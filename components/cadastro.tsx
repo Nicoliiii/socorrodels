@@ -1,7 +1,7 @@
 // Cadastro.tsx
 import { useState } from 'react';
 
-export default function Cadastro({
+export default function cadastro({
   onSalvar,
   onCancel,
 }: {
@@ -40,4 +40,5 @@ export default function Cadastro({
       <button onClick={onCancel}>Cancelar</button>
     </div>
   );
+  
 }

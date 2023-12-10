@@ -1,14 +1,12 @@
-// page.tsx
-import { useClient } from 'next/data-client';
-import Cadastro from './cadastro';
+import { useEffect, useState } from 'react';
+import Cadastro from '../components/cadastro'; // Ajuste o caminho conforme necessário
 
 export default function Home() {
-  const { data: livros } = useClient().useState([]); // Use useClient here
-
-  const [mostrarCadastro, setMostrarCadastro] = livros.useState(false);
+  const [livros, setLivros] = useState([]);
+  const [mostrarCadastro, setMostrarCadastro] = useState(false);
 
   const handleSalvarLivro = (livro) => {
-    livros.setState([...livros(), livro]);
+    setLivros([...livros, livro]);
     setMostrarCadastro(false);
   };
 
@@ -16,11 +14,16 @@ export default function Home() {
     setMostrarCadastro(false);
   };
 
+  useEffect(() => {
+    // Aqui você pode adicionar código que é executado apenas no lado do cliente,
+    // como realizar operações de inicialização ou buscar dados do servidor.
+  }, []); // O array vazio [] significa que este efeito será executado apenas uma vez, sem dependências.
+
   return (
     <div>
       <h1>Lista de Livros</h1>
       <ul>
-        {livros().map((livro, index) => (
+        {livros.map((livro, index) => (
           <li key={index}>
             {livro.nome} - {livro.numPaginas} páginas
           </li>
@@ -30,7 +33,7 @@ export default function Home() {
       <button onClick={() => setMostrarCadastro(true)}>Cadastro</button>
 
       {mostrarCadastro && (
-        <Cadastro
+        <cadastro
           onSalvar={handleSalvarLivro}
           onCancel={handleCancelarCadastro}
         />
