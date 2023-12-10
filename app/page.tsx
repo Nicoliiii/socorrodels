@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Cadastro from '../components/cadastro'; // Ajuste o caminho conforme necessário
+import Cadastro from '../components/Cadastro'; // Ajuste o caminho conforme necessário
 
 export default function Home() {
   const [livros, setLivros] = useState([]);
@@ -33,7 +33,7 @@ export default function Home() {
       <button onClick={() => setMostrarCadastro(true)}>Cadastro</button>
 
       {mostrarCadastro && (
-        <cadastro
+        <Cadastro
           onSalvar={handleSalvarLivro}
           onCancel={handleCancelarCadastro}
         />
