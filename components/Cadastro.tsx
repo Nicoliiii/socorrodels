@@ -1,15 +1,17 @@
-// Cadastro.tsx
+import { useClient } from 'next/data-client';
 import { useState } from 'react';
 
-export default function cadastro({
+export default function Cadastro({
   onSalvar,
   onCancel,
 }: {
   onSalvar: (livro: { nome: string; numPaginas: number }) => void;
   onCancel: () => void;
 }) {
-  const [nome, setNome] = useState('');
-  const [numPaginas, setNumPaginas] = useState('');
+  const client = useClient(); // Adicione esta linha
+
+  const [nome, setNome] = client.useState('');
+  const [numPaginas, setNumPaginas] = client.useState('');
 
   const handleSalvar = () => {
     onSalvar({ nome, numPaginas: parseInt(numPaginas, 10) });
@@ -40,5 +42,4 @@ export default function cadastro({
       <button onClick={onCancel}>Cancelar</button>
     </div>
   );
-  
 }
